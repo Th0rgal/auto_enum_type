@@ -15,7 +15,7 @@ auto_enum_type = { git = "https://github.com/Th0rgal/auto_enum_type" }
 
 Use the `#[derive(TypeEnum)]` attribute on your enum:
 ```rs
-use type_enum::TypeEnum;
+use auto_enum_type::TypeEnum;
 
 #[derive(TypeEnum)]
 pub enum MyEnum {
