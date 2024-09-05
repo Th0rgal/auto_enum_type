@@ -3,16 +3,15 @@ use proc_macro::TokenStream;
 use quote::quote;
 use syn::{parse_macro_input, Data, DeriveInput, Ident};
 
-// Generates a Type enum and conversion method for the input enum
-#[proc_macro_derive(TypeEnum)]
-pub fn derive_type_enum(input: TokenStream) -> TokenStream {
-    let input = parse_macro_input!(input as DeriveInput);
+#[proc_macro_attribute]
+pub fn type_enum(_attr: TokenStream, item: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(item as DeriveInput);
     let enum_name = &input.ident;
     let attrs = &input.attrs;
 
     let data = match input.data {
         Data::Enum(data) => data,
-        _ => panic!("TypeEnum can only be derived for enums"),
+        _ => panic!("TypeEnum can only be used on enums"),
     };
 
     let enum_type_name = Ident::new(&format!("{}Type", enum_name), enum_name.span());
@@ -28,10 +27,9 @@ pub fn derive_type_enum(input: TokenStream) -> TokenStream {
 
     let expanded = quote! {
         #(#attrs)*
-        #[repr(C)]
+        #[repr(#repr_type)]
         pub enum #enum_name {
             #(#variants),*
-            // ... potentially with fields
         }
 
         #[repr(#repr_type)]

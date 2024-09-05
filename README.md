@@ -1,13 +1,13 @@
-# auto_enum_type
+# auto_type_enum
 
-`auto_enum_type` is a Rust procedural macro library that simplifies the creation of type enums from existing enums. It automatically generates a corresponding type enum and a conversion method, making it easier to work with enum variants as types.
+`auto_type_enum` is a Rust procedural macro library that simplifies the creation of type enums from existing enums. It automatically generates a corresponding type enum and a conversion method, making it easier to work with enum variants as types.
 
 ## Installation
 
-Add `auto_enum_type` to your `Cargo.toml`:
+Add `auto_type_enum` to your `Cargo.toml`:
 ```toml
 [dependencies]
-auto_enum_type = { git = "https://github.com/Th0rgal/auto_enum_type" }
+auto_type_enum = { git = "https://github.com/Th0rgal/auto_type_enum" }
 ```
 
 
@@ -15,9 +15,9 @@ auto_enum_type = { git = "https://github.com/Th0rgal/auto_enum_type" }
 
 Use the `#[derive(TypeEnum)]` attribute on your enum:
 ```rs
-use auto_enum_type::TypeEnum;
+use auto_type_enum::type_enum;
 
-#[derive(TypeEnum)]
+#[type_enum]
 pub enum MyEnum {
     Variant1,
     Variant2(String),

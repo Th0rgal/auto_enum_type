@@ -1,11 +1,12 @@
 [package]
-name = "auto_enum_type"
+name = "auto_type_enum"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+proc-macro2 = "~1.0.86"
 quote = "~1.0.37"
-syn = "~2.0.77"
+syn = { version = "~2.0.77", features = ["full"] }
 
 [lib]
 proc-macro = true
