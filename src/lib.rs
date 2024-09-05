@@ -33,6 +33,7 @@ pub fn type_enum(_attr: TokenStream, item: TokenStream) -> TokenStream {
         }
 
         #[repr(#repr_type)]
+        #[derive(Eq, Hash, PartialEq)]
         pub enum #enum_type_name {
             #(#variants),*
         }
