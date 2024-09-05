@@ -11,7 +11,11 @@ pub fn type_enum(_attr: TokenStream, item: TokenStream) -> TokenStream {
 
     let data = match input.data {
         Data::Enum(data) => data,
-        _ => panic!("TypeEnum can only be used on enums"),
+        _ => {
+            return TokenStream::from(quote! {
+                compile_error!("#[type_enum] can only be used on enums");
+            })
+        }
     };
 
     let enum_type_name = Ident::new(&format!("{}Type", enum_name), enum_name.span());
@@ -24,6 +28,8 @@ pub fn type_enum(_attr: TokenStream, item: TokenStream) -> TokenStream {
         65537..=4294967296 => quote!(u32),
         _ => quote!(u64),
     };
+
+    let into_enum_type_trait_name = Ident::new(&format!("Into{}Type", enum_name), enum_name.span());
 
     let expanded = quote! {
         #(#attrs)*
